@@ -1,0 +1,26 @@
+{
+  "name": "punchline-machine",
+  "version": "1.0.0",
+  "description": "- Add tweet button - Add GA - Do english version - Add a share button - Create domain name",
+  "main": "app.js",
+  "dependencies": {
+    "alltomp3": "^0.1.0",
+    "lodash": "^4.17.4",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EliotAndres/punchline-machine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EliotAndres/punchline-machine/issues"
+  },
+  "homepage": "https://github.com/EliotAndres/punchline-machine#readme"
+}

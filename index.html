@@ -1,0 +1,116 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <title>Markov's Incubator - Startup Pitch Generator</title>
+    <meta charset="UTF-8">
+
+    <link href="favicon.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="vendors/swiper.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Cardo|Montserrat|Quicksand" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Search Engine -->
+    <meta name="description" content="Startup Pitch Generator using Markov Chains">
+    <meta name="image" content="/main.png">
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="Markov's Incubator">
+    <meta itemprop="description" content="Startup Pitch Generator using Markov Chains">
+    <meta itemprop="image" content="/main.png">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Markov's Incubator">
+    <meta name="twitter:description" content="Startup Pitch Generator using Markov Chains">
+    <meta name="twitter:site" content="@eliotandres">
+    <meta name="twitter:image:src" content="/main.png">
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta name="og:title" content="Markov's Incubator">
+    <meta name="og:description" content="Startup Pitch Generator using Markov Chains">
+    <meta name="og:url" content="http://ndres.me/markov-incubator/">
+    <meta name="og:site_name" content="Markov's Incubator">
+    <meta name="og:locale" content="en_US">
+    <meta name="og:type" content="website">
+
+</head>
+<body ng-controller="MainController">
+
+<div class="wrapper">
+    <div class="intro" ng-if="step == 0">
+        <div class="intro-text-wrapper">
+            <h2>Markov's incubator</h2>
+            <h5>Startup pitch generator</h5>
+            <button type="button" class="btn btn-default" ng-click="setStep(1)">Begin</button>
+        </div>
+    </div>
+    <div class="selector" ng-if="step == 1">
+
+        <button ng-click="generate()"
+                type="button"
+                class="btn btn-info button">
+            Make another !
+        </button>
+
+        <div class="loader" ng-if="loading">
+            <img src="spinner.gif" alt="">
+        </div>
+
+        <blockquote ng-if="pitch" class="punchline-wrapper">
+            <p class="punchline">{{pitch}}</p>
+        </blockquote>
+
+        <div ng-if="pitch" class="button-wrapper">
+            <a twitter data-url="http://ndres.me/markov-incubator"></a>
+        </div>
+
+    </div>
+    <div class="info-modal" ng-if="step == 2">
+        <div class="info-wrapper">
+            <h3>Info</h3>
+            <p>Looking for your next startup idea ? Markov's incubator allows you to generate startup pitches using Markov Chains. This experiment uses real pitches from real startups</p>
+            <h3>How it works</h3>
+            <p>Markov's incubator uses <a target="_blank" href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> to generate pitches.
+            </p>
+            <p>Let's take a simple example. If one pitch is "Our startup is the best" and another is "Our startup rocks", we'll deduce that "startup" is followed by "is" or "rocks" each with a 0.5 probability. To generate a new pitch, we'll start with a random word and use these probabilities to find the next words.</p>
+            <p>You can find a much better explanation <a target="_blank" href="http://setosa.io/ev/markov-chains/">here</a></p>
+            <h3>Sources</h3>
+            <p>The pitches come from the <a href="https://vivatechnology.com/about/">Vivatech 2017 edition:</a> therefore they are mostly from French startups. I tried to mask the names of the companies, but some may have slipped.</p>
+            <p>Design is (heavily) inspired from a
+                <a target="_blank" href="https://aiexperiments.withgoogle.com/sound-maker/view/">Google Experiment</a></p>
+            <p>The heart of the generator is a JS port of the wonderful
+                <a target="_blank" href="https://github.com/jsvine/markovify">Markovify</a></p>
+            <p>Source code is
+                <a target="_blank" href="https://github.com/EliotAndres/markov-incubator">available here</a></p>
+            <p>Made with love by
+                <a target="_blank" href="http://ndres.me">Eliot Andres</a></p>
+        </div>
+
+    </div>
+
+    <div class="info" ng-if="step != 2"><a href="#" ng-click="setStep(2)"> ℹ Info</a></div>
+    <div class="info" ng-if="step == 2"><a href="#" ng-click="setStep(1)"> Close X</a></div>
+</div> <!-- /container -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+
+<script src="vendors/markovify.js"></script>
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+<script src="app.js"></script>
+</body>
+</html>
